@@ -187,6 +187,8 @@ Response Body :
 }
 ```
 
+Endpoint : GET /products
+
 ## Get Product
 
 ### Get All Product
@@ -262,6 +264,28 @@ Response Body :
 }
 ```
 
+## Get Product By Search
+
+Endpoint : GET /products?search=indomie
+
+Response Body :
+
+````json
+{
+    "status": 200,
+    "message": "successfully get with search: indomie",
+    "data": [
+        {
+            "id": "913ef096-1d2b-4de2-b7c2-bb0bec62b664",
+            "nama": "Indomie Goreng",
+            "harga": 13000,
+            "img": "https://gambar-ecek-ecek.com/gambar.png"
+        }
+    ],
+    "refrance": null,
+    "error": false
+}
+
 ## Created Address
 
 Endpoint : POST /address
@@ -282,7 +306,7 @@ Request Body :
   "negara": "indonesia",
   "telepon": "+628833223322"
 }
-```
+````
 
 Response Body :
 
