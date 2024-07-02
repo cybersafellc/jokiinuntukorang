@@ -192,6 +192,13 @@ const search = async (request) => {
       ],
     },
   });
+  if (!user)
+    return new Response(
+      200,
+      "uh-oh users with firsname or lastname like " +
+        result.search +
+        " does not exist"
+    );
   const orders = await database.orders.findMany({
     orderBy: {
       tanggal: "desc",
