@@ -198,7 +198,7 @@ const search = async (request) => {
       "uh-oh users with firsname or lastname like " +
         result.search +
         " does not exist",
-      null,
+      [],
       null,
       false
     );
