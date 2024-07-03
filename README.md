@@ -81,6 +81,95 @@ Response Body
 }
 ```
 
+## Get Admin Profile
+
+Endpoint : GET /users
+
+Headers :
+
+- Authorization : Bearer access_token
+
+Response Body:
+
+```json
+{
+  "status": 200,
+  "message": "successfully get",
+  "data": {
+    "id": "6e2ee82b-4ae6-4042-9ddc-128a2795f508",
+    "username": "rusnanda",
+    "first_name": "bang",
+    "last_name": "jago"
+  },
+  "refrance": null,
+  "error": false
+}
+```
+
+## Admin Update Password
+
+Endpoint : PUT /users/password
+
+Headers :
+
+- Authorization : Bearer access_token
+
+Request Body :
+
+```json
+{
+  "current_password": "anjay123",
+  "new_password": "suek123"
+}
+```
+
+Response Body :
+
+```json
+{
+  "status": 200,
+  "message": "successfully update password",
+  "data": {
+    "username": "rusnanda"
+  },
+  "refrance": null,
+  "error": false
+}
+```
+
+## Admin Update Name
+
+Endpoint : PUT /users/name
+
+Headers:
+
+- Authorization : Bearer access_token
+
+Request Body :
+
+```json
+{
+  "first_name": "bang", //optional
+  "last_name": "jago" //optional
+}
+```
+
+Response Body :
+
+```json
+{
+  "status": 200,
+  "message": "successfully update name",
+  "data": {
+    "username": "rusnanda",
+    "first_name": "bang",
+    "last_name": "jago"
+  },
+  "refrance": null,
+  "error": false
+}
+```
+
 ## Created Product
 
 Endpoint : POST /products

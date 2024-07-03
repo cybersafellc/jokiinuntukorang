@@ -13,4 +13,20 @@ const login = Joi.object({
   password: Joi.string().required(),
 });
 
-export default { create, login };
+const getProfile = Joi.object({
+  id: Joi.string().required(),
+});
+
+const resetPassword = Joi.object({
+  id: Joi.string().required(),
+  current_password: Joi.string().required(),
+  new_password: Joi.string().required(),
+});
+
+const updateName = Joi.object({
+  id: Joi.string().required(),
+  first_name: Joi.string().optional(),
+  last_name: Joi.string().optional(),
+});
+
+export default { create, login, getProfile, resetPassword, updateName };

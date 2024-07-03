@@ -57,4 +57,86 @@ const verifToken = async () => {
   return new Response(200, "token verified", null, null, false);
 };
 
-export default { create, login, verifToken };
+const getProfile = async (request) => {
+  const result = await validation(usersValidation.getProfile, request);
+  const user = await database.users.findUnique({
+    where: {
+      id: result.id,
+    },
+    select: {
+      id: true,
+      username: true,
+      first_name: true,
+      last_name: true,
+    },
+  });
+  if (!user) throw new ResponseError(400, "users does not exist");
+  return new Response(200, "successfully get", user, null, false);
+};
+
+const resetPassword = async (request) => {
+  const result = await validation(usersValidation.resetPassword, request);
+  const user = await database.users.findUnique({
+    where: {
+      id: result.id,
+    },
+  });
+  if (!user) throw new ResponseError(400, "user does not exist");
+  if (await bcrypt.compare(result.current_password, user.password)) {
+    result.new_password = await bcrypt.hash(result.new_password, 10);
+    const updated = await database.users.update({
+      data: {
+        password: result.new_password,
+      },
+      where: {
+        id: result.id,
+      },
+      select: {
+        username: true,
+      },
+    });
+    return new Response(
+      200,
+      "successfully update password",
+      updated,
+      null,
+      false
+    );
+  }
+  throw new ResponseError(400, "current_password is wrong");
+};
+
+const updateName = async (request) => {
+  const result = await validation(usersValidation.updateName, request);
+  console.log(result);
+  const count = await database.users.count({
+    where: {
+      id: result.id,
+    },
+  });
+  if (!count) throw new ResponseError(400, "user does not exist");
+  const updated = await database.users.update({
+    data: {
+      first_name: result.first_name,
+      last_name: result.last_name,
+    },
+    where: {
+      id: result.id,
+    },
+    select: {
+      username: true,
+      first_name: true,
+      last_name: true,
+    },
+  });
+  return new Response(200, "successfully update name", updated, null, false);
+};
+
+export default {
+  create,
+  login,
+  verifToken,
+  getProfile,
+  resetPassword,
+  updateName,
+};

@@ -13,6 +13,17 @@ router.get(
   authMiddleware.access_token,
   usersController.verifToken
 );
+router.get("/users", authMiddleware.access_token, usersController.getProfile);
+router.put(
+  "/users/password",
+  authMiddleware.access_token,
+  usersController.resetPassword
+);
+router.put(
+  "/users/name",
+  authMiddleware.access_token,
+  usersController.updateName
+);
 
 router.post(
   "/products",
