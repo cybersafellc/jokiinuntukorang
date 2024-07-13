@@ -2,7 +2,7 @@
 
 ## URL
 
-- URL : URL : https://api-muhammad-fiqri.rpnanda.com
+- URL : https://api-coffee.duckdns.org
 
 ## Admin Create Account
 
